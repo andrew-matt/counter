@@ -2,5 +2,6 @@
     margin-top: 200px;
     display: flex;
     justify-content: center;
-    color: lightskyblue;
+    justify-items: auto;
+    color: #00BFFF;
 }

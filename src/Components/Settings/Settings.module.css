@@ -1,0 +1,35 @@
+.settings {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #00BFFF;
+    border-radius: 5px;
+    width: 210px;
+}
+
+.values {
+    border: 1px solid #00BFFF;
+    border-radius: 5px;
+    margin: 5px 5px 0 5px;
+    padding: 5px;
+}
+
+.maxValue {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    padding-bottom: 5px;
+}
+
+.minValue {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+}
+
+.setButton {
+    text-align: center;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid #00BFFF;
+    border-radius: 5px;
+}
