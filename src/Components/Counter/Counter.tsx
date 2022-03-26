@@ -4,14 +4,17 @@ import s from './Counter.module.css'
 
 type CounterPropsType = {
     number: number
+    maxValue: number
+    minValue: number
     increaseNumber: () => void
     resetNumber: () => void
+    setValues: (maxValue: number, minValue: number) => void
 }
 
 export const Counter = (props: CounterPropsType) => {
 
-    const disabledIncButton = props.number === 5
-    const disabledResetButton = props.number === 0
+    const disabledIncButton = props.number === props.maxValue
+    const disabledResetButton = props.number === props.minValue
     const numberClassname = s.number + ' ' + (disabledIncButton && s.numberMax)
 
     return (

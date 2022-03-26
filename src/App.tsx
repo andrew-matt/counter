@@ -1,27 +1,48 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import './App.css';
 import {Counter} from "./Components/Counter/Counter";
 import {Settings} from "./Components/Settings/Settings";
 
 function App() {
 
-    const [number, setNumber] = useState(0)
+    useEffect(() => {
+        let valueAsString = localStorage.getItem('minValue')
+        if (valueAsString) {
+            let minValue = JSON.parse(valueAsString)
+            setNumber(minValue)
+        }
+    }, [])
+
+    const [maxValue, setMaxValue] = useState(0)
+    const [minValue, setMinValue] = useState(0)
+    const [number, setNumber] = useState(minValue)
 
     const increaseNumber = () => {
         setNumber(number + 1)
     }
 
     const resetNumber = () => {
-        setNumber(0)
+        setNumber(minValue)
+    }
+
+    const setValues = (maxValue: number, minValue: number) => {
+        setMaxValue(maxValue)
+        setMinValue(minValue)
     }
 
     return (
         <div className="App">
-            <Settings/>
+            <Settings
+                setValues={setValues}
+                setNumber={setNumber}
+            />
             <Counter
                 number={number}
+                maxValue={maxValue}
+                minValue={minValue}
                 increaseNumber={increaseNumber}
                 resetNumber={resetNumber}
+                setValues={setValues}
             />
         </div>
     )
