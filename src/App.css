@@ -1,7 +1,10 @@
 .App {
-    margin-top: 120px;
-    display: flex;
-    justify-content: center;
-    justify-items: auto;
-    color: #00BFFF;
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #61dafb;
 }
