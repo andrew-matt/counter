@@ -1,0 +1,17 @@
+.button {
+    background-color: #61dafb;
+    border-radius: 5px;
+    border: none;
+    color: #282c34;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.button:disabled {
+    opacity: 50%;
+}
+
+.button_clicked {
+    background-color: #282c34;
+    color: #61dafb;
+}

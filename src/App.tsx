@@ -1,7 +1,9 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import './App.css';
-import s from './Counter.module.css'
-import styles from './Settings.module.css'
+import counterStyles from './Components/Counter/Counter.module.css'
+import inputStyles from './Components/Input/Input.module.css'
+import {Settings} from "./Components/Settings/Settings";
+import {Counter} from "./Components/Counter/Counter";
 
 function App() {
 
@@ -29,23 +31,17 @@ function App() {
     const [startValue, setStartValue] = useState(inputMinValue)
     const [maxValue, setMaxValue] = useState(inputMaxValue)
     const [number, setNumber] = useState(inputMinValue)
-    const [setButtonClicked, setSetButtonClicked] = useState(false)
-    const [incButtonClicked, setIncButtonClicked] = useState(false)
-    const [resetButtonClicked, setResetButtonClicked] = useState(false)
     const [inputChange, setInputChange] = useState(false)
     const [inputMaxValueError, setInputMaxValueError] = useState(false)
     const [inputMinValueError, setInputMinValueError] = useState(false)
 
-    const inputMaxClass = `${styles.input} + ${inputMaxValueError && styles.input_max_value_error}`
-    const inputMinClass = `${styles.input} + ${inputMinValueError && styles.input_min_value_error}`
-    const numberClass = `${s.counter_number_window} 
-    + ${inputMaxValueError && s.counter_number_error}
-    + ${inputMinValueError && s.counter_number_error}
-    + ${inputChange && s.counter_number_text}
-    + ${number === maxValue && s.counter_number_max}`
-    const setClass = styles.set_button + " " + (setButtonClicked && styles.clicked)
-    const incClass = s.counter_button + " " + (incButtonClicked && s.clicked)
-    const resetClass = s.counter_button + " " + (resetButtonClicked && s.clicked)
+    const inputMaxClass = `${inputMaxValueError && inputStyles.input_max_value_error}`
+    const inputMinClass = `${inputMinValueError && inputStyles.input_min_value_error}`
+    const numberClass = `${counterStyles.counter_number_window} 
+    + ${inputMaxValueError && counterStyles.counter_number_error}
+    + ${inputMinValueError && counterStyles.counter_number_error}
+    + ${inputChange && counterStyles.counter_number_text}
+    + ${number === maxValue && counterStyles.counter_number_max}`
 
     const onIncClickHandler = () => {
         setNumber(number + 1)
@@ -94,69 +90,28 @@ function App() {
 
     return (
         <div className="App">
-            <div className={styles.settings_window}>
-                <div className={styles.inputs_window}>
-                    <div className={styles.input_div}>
-                        max value:
-                        <input
-                            type="number"
-                            value={inputMaxValue}
-                            className={inputMaxClass}
-                            onChange={onMaxValueInputChange}
-                        />
-                    </div>
-                    <div className={styles.input_div}>
-                        start value:
-                        <input
-                            type="number"
-                            value={inputMinValue}
-                            className={inputMinClass}
-                            onChange={onMinValueInputChange}
-                        />
-                    </div>
-                </div>
-                <div className={styles.button_window}>
-                    <button
-                        onClick={onSetButtonClick}
-                        disabled={inputMaxValue === inputMinValue || inputMaxValueError || inputMinValueError}
-                        onMouseDown={() => setSetButtonClicked(true)}
-                        onMouseUp={() => setSetButtonClicked(false)}
-                        className={setClass}
-                    >set
-                    </button>
-                </div>
-            </div>
-            <div className={s.counter_window}>
-                <div className={numberClass}>
-                    {
-                        inputChange && !inputMaxValueError && !inputMinValueError
-                            ? "enter values and press 'set'"
-                            : inputMaxValueError
-                                ? "Incorrect value!"
-                                : inputMinValueError
-                                    ? "Incorrect value!"
-                                    : number
-                    }
-                </div>
-                <div className={s.counter_buttons_window}>
-                    <button
-                        onClick={onIncClickHandler}
-                        disabled={number === maxValue || inputChange || inputMaxValueError || inputMinValueError}
-                        onMouseDown={() => setIncButtonClicked(true)}
-                        onMouseUp={() => setIncButtonClicked(false)}
-                        className={incClass}
-                    >inc
-                    </button>
-                    <button
-                        onClick={onResetClickHandler}
-                        disabled={number === startValue || inputChange || inputMaxValueError || inputMinValueError}
-                        onMouseDown={() => setResetButtonClicked(true)}
-                        onMouseUp={() => setResetButtonClicked(false)}
-                        className={resetClass}
-                    >reset
-                    </button>
-                </div>
-            </div>
+            <Settings
+                inputMaxValue={inputMaxValue}
+                inputMinValue={inputMinValue}
+                inputMaxClass={inputMaxClass}
+                inputMinClass={inputMinClass}
+                onMaxValueInputChange={onMaxValueInputChange}
+                onMinValueInputChange={onMinValueInputChange}
+                inputMaxValueError={inputMaxValueError}
+                inputMinValueError={inputMinValueError}
+                onSetButtonClick={onSetButtonClick}
+            />
+            <Counter
+                number={number}
+                numberClass={numberClass}
+                startValue={startValue}
+                maxValue={maxValue}
+                inputChange={inputChange}
+                inputMaxValueError={inputMaxValueError}
+                inputMinValueError={inputMinValueError}
+                onIncClickHandler={onIncClickHandler}
+                onResetClickHandler={onResetClickHandler}
+            />
         </div>
     );
 }

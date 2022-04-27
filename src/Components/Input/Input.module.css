@@ -1,0 +1,19 @@
+.input {
+    width: 50px;
+    border: 1px solid #61dafb;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 7px;
+    font-weight: bold;
+    outline: none;
+}
+
+.input_max_value_error {
+    background-color: lightcoral;
+    border: 1px solid darkred;
+}
+
+.input_min_value_error {
+    background-color: lightcoral;
+    border: 1px solid darkred;
+}
