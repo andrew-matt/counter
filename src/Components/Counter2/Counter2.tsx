@@ -1,4 +1,4 @@
-import counterStyles from "./Counter.module.css";
+import counter2Styles from "./Counter2.module.css";
 import {Button} from "../Button/Button";
 import React from "react";
 
@@ -12,11 +12,12 @@ type CounterPropsType = {
     inputMinValueError: boolean
     onIncClickHandler: () => void
     onResetClickHandler: () => void
+    onSetClickHandler: () => void
 }
 
-export function Counter(props: CounterPropsType) {
+export function Counter2(props: CounterPropsType) {
     return (
-        <div className={counterStyles.counter_window}>
+        <div className={counter2Styles.counter2_window}>
             <div className={props.numberClass}>
                 {
                     props.inputChange && !props.inputMaxValueError && !props.inputMinValueError
@@ -28,7 +29,7 @@ export function Counter(props: CounterPropsType) {
                                 : props.number
                 }
             </div>
-            <div className={counterStyles.counter_buttons_window}>
+            <div className={counter2Styles.counter_buttons_window}>
                 <Button
                     callback={props.onIncClickHandler}
                     disabled={props.number === props.maxValue || props.inputChange || props.inputMaxValueError || props.inputMinValueError}
@@ -38,6 +39,11 @@ export function Counter(props: CounterPropsType) {
                     callback={props.onResetClickHandler}
                     disabled={props.number === props.startValue || props.inputChange || props.inputMaxValueError || props.inputMinValueError}
                     title={"reset"}
+                />
+                <Button
+                    callback={props.onSetClickHandler}
+                    disabled={false}
+                    title={"set"}
                 />
             </div>
         </div>

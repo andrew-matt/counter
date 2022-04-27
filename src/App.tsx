@@ -4,6 +4,8 @@ import counterStyles from './Components/Counter/Counter.module.css'
 import inputStyles from './Components/Input/Input.module.css'
 import {Settings} from "./Components/Settings/Settings";
 import {Counter} from "./Components/Counter/Counter";
+import {Counter2} from "./Components/Counter2/Counter2";
+import {Settings2} from "./Components/Settings2/Settings2";
 
 function App() {
 
@@ -34,6 +36,7 @@ function App() {
     const [inputChange, setInputChange] = useState(false)
     const [inputMaxValueError, setInputMaxValueError] = useState(false)
     const [inputMinValueError, setInputMinValueError] = useState(false)
+    const [showSettings, setShowSettings] = useState(false)
 
     const inputMaxClass = `${inputMaxValueError && inputStyles.input_max_value_error}`
     const inputMinClass = `${inputMinValueError && inputStyles.input_min_value_error}`
@@ -52,12 +55,13 @@ function App() {
     }
 
     const onMaxValueInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputMaxValue(Number(e.currentTarget.value))
+        let value = Number(e.currentTarget.value)
+        setInputMaxValue(value)
         setInputChange(true)
-        if (Number(e.currentTarget.value) < 1 || Number(e.currentTarget.value) <= inputMinValue) {
+        if (value < 1 || value <= inputMinValue) {
             setInputMaxValueError(true)
             setInputChange(false)
-        } else if (Number(e.currentTarget.value) > 0 && Number(e.currentTarget.value) > inputMinValue) {
+        } else if (value > 0 && value > inputMinValue) {
             setInputMaxValueError(false)
             if (inputMinValue >= 0) {
                 setInputMinValueError(false)
@@ -66,12 +70,13 @@ function App() {
     }
 
     const onMinValueInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputMinValue(Number(e.currentTarget.value))
+        let value = Number(e.currentTarget.value)
+        setInputMinValue(value)
         setInputChange(true)
-        if (Number(e.currentTarget.value) < 0 || Number(e.currentTarget.value) >= inputMaxValue) {
+        if (value < 0 || value >= inputMaxValue) {
             setInputMinValueError(true)
             setInputChange(false)
-        } else if (Number(e.currentTarget.value) >= 0 && Number(e.currentTarget.value) < inputMaxValue) {
+        } else if (value >= 0 && value < inputMaxValue) {
             setInputMinValueError(false)
             setInputMaxValueError(false)
         }
@@ -88,9 +93,51 @@ function App() {
         localStorage.setItem('inputMinValue', String(inputMinValue))
     }
 
+    const onSet2ButtonClick = () => {
+        setInputChange(false)
+        setInputMaxValueError(false)
+        setInputMinValueError(false)
+        setStartValue(inputMinValue)
+        setMaxValue(inputMaxValue)
+        setNumber(inputMinValue)
+        localStorage.setItem('inputMaxValue', String(inputMaxValue))
+        localStorage.setItem('inputMinValue', String(inputMinValue))
+        setShowSettings(false)
+    }
+
+    const onSetClickHandler = () => {
+        setShowSettings(true)
+    }
+
     return (
         <div className="App">
-            <Settings
+            {
+                showSettings
+                    ? <Settings2
+                        inputMaxValue={inputMaxValue}
+                        inputMinValue={inputMinValue}
+                        inputMaxClass={inputMaxClass}
+                        inputMinClass={inputMinClass}
+                        onMaxValueInputChange={onMaxValueInputChange}
+                        onMinValueInputChange={onMinValueInputChange}
+                        inputMaxValueError={inputMaxValueError}
+                        inputMinValueError={inputMinValueError}
+                        onSetButtonClick={onSet2ButtonClick}
+                    />
+                    : <Counter2
+                        number={number}
+                        numberClass={numberClass}
+                        startValue={startValue}
+                        maxValue={maxValue}
+                        inputChange={inputChange}
+                        inputMaxValueError={inputMaxValueError}
+                        inputMinValueError={inputMinValueError}
+                        onIncClickHandler={onIncClickHandler}
+                        onResetClickHandler={onResetClickHandler}
+                        onSetClickHandler={onSetClickHandler}
+                    />
+            }
+            {/*<Settings
                 inputMaxValue={inputMaxValue}
                 inputMinValue={inputMinValue}
                 inputMaxClass={inputMaxClass}
@@ -100,18 +147,18 @@ function App() {
                 inputMaxValueError={inputMaxValueError}
                 inputMinValueError={inputMinValueError}
                 onSetButtonClick={onSetButtonClick}
-            />
-            <Counter
-                number={number}
-                numberClass={numberClass}
-                startValue={startValue}
-                maxValue={maxValue}
-                inputChange={inputChange}
-                inputMaxValueError={inputMaxValueError}
-                inputMinValueError={inputMinValueError}
-                onIncClickHandler={onIncClickHandler}
-                onResetClickHandler={onResetClickHandler}
-            />
+            />*/}
+            {/*<Counter*/}
+            {/*    number={number}*/}
+            {/*    numberClass={numberClass}*/}
+            {/*    startValue={startValue}*/}
+            {/*    maxValue={maxValue}*/}
+            {/*    inputChange={inputChange}*/}
+            {/*    inputMaxValueError={inputMaxValueError}*/}
+            {/*    inputMinValueError={inputMinValueError}*/}
+            {/*    onIncClickHandler={onIncClickHandler}*/}
+            {/*    onResetClickHandler={onResetClickHandler}*/}
+            {/*/>*/}
         </div>
     );
 }
