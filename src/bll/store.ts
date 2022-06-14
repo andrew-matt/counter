@@ -17,6 +17,4 @@ export const store = createStore(rootReducer, preloadedState)
 
 store.subscribe(() => {
     localStorage.setItem('app-state', JSON.stringify(store.getState()))
-    localStorage.setItem('max-value', JSON.stringify(store.getState().counter.maxValue))
-    localStorage.setItem('start-value', JSON.stringify(store.getState().counter.startValue))
 })

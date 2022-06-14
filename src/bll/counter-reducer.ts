@@ -5,7 +5,6 @@ type ActionType = ReturnType<typeof incValue>
     | ReturnType<typeof setValue>
     | ReturnType<typeof setMaxValue>
     | ReturnType<typeof setStartValue>
-    | ReturnType<typeof setValueFromLocalStorage>
 
 const initialState = {
     settingsChanged: false,
@@ -54,11 +53,6 @@ export const counterReducer = (state: InitialStateType = initialState, action: A
                 ...state,
                 startValue: action.startValue
             }
-        case "SET-VALUE-FROM-LOCAL-STORAGE":
-            return {
-                ...state,
-                value: action.value
-            }
         default:
             return state
     }
@@ -71,4 +65,3 @@ export const changeSettings = (settingsChanged: boolean) => ({type: 'SETTINGS-CH
 export const setValue = (value: number) => ({type: 'SET-VALUE', value} as const)
 export const setMaxValue = (maxValue: number) => ({type: 'SET-MAX-VALUE', maxValue} as const)
 export const setStartValue = (startValue: number) => ({type: 'SET-START-VALUE', startValue} as const)
-export const setValueFromLocalStorage = (value: number) => ({type: 'SET-VALUE-FROM-LOCAL-STORAGE', value} as const)

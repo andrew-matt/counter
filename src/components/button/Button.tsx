@@ -3,7 +3,7 @@ import React from "react";
 
 type ButtonPropsType = {
     callback: () => void
-    disabled: boolean
+    disabled?: boolean
     title: string
 }
 
