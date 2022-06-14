@@ -1,0 +1,42 @@
+.counterContainer {
+    display: grid;
+    grid-template-rows: 3fr 2fr;
+    width: 200px;
+    height: 140px;
+    border: 1px solid #61dafb;
+    border-radius: 5px;
+    padding: 7px;
+}
+
+.valueContainer {
+    border: 1px solid #61dafb;
+    border-radius: 5px;
+    margin-bottom: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.valueContainerMaxValue {
+    color: darkred;
+    font-size: 40px;
+}
+
+.valueContainerChangeSettings {
+    font-size: 12px;
+}
+
+.valueContainerError {
+    color: darkred;
+    font-size: 12px;
+}
+
+.buttonsContainer {
+    border: 1px solid #61dafb;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}

@@ -8,12 +8,7 @@
     outline: none;
 }
 
-.input_max_value_error {
-    background-color: lightcoral;
-    border: 1px solid darkred;
-}
-
-.input_min_value_error {
+.inputError {
     background-color: lightcoral;
     border: 1px solid darkred;
 }

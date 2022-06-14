@@ -5,13 +5,14 @@
     color: #282c34;
     font-weight: bold;
     font-size: 20px;
+    padding: 0 5px;
 }
 
 .button:disabled {
     opacity: 50%;
 }
 
-.button_clicked {
+.button:enabled:active {
     background-color: #282c34;
     color: #61dafb;
 }
