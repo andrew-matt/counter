@@ -1,5 +1,5 @@
 import style from "./settings.module.css";
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useCallback} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../bll/store";
 import {changeSettings, setError, setMaxValue, setStartValue, setValue} from "../../bll/counter-reducer";
@@ -7,7 +7,6 @@ import {Button} from "../button/Button";
 import {Input} from "../input/Input";
 
 export const Settings = () => {
-
     const maxValue = useSelector<AppStateType, number>(state => state.counter.maxValue)
     const startValue = useSelector<AppStateType, number>(state => state.counter.startValue)
     const error = useSelector<AppStateType, boolean>(state => state.counter.error)
@@ -36,12 +35,12 @@ export const Settings = () => {
             dispatch(changeSettings(true))
         }
         dispatch(setStartValue(+e.currentTarget.value))
+        dispatch(setValue(+e.currentTarget.value))
     }
 
-    const onSetButtonClickHandler = () => {
+    const onSetButtonClickHandler = useCallback(() => {
         dispatch(changeSettings(false))
-        dispatch(setValue(startValue))
-    }
+    }, [dispatch])
 
     return (
         <div className={style.settingsContainer}>

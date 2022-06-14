@@ -1,5 +1,5 @@
 import style from "./counter.module.css";
-import React from "react";
+import React, {useCallback} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../bll/store";
 import {incValue, resetValue} from "../../bll/counter-reducer";
@@ -20,13 +20,13 @@ export const Counter = () => {
      ${settingsChanged && style.valueContainerChangeSettings}
      ${error && style.valueContainerError}`
 
-    const incHandler = () => {
+    const incHandler = useCallback(() => {
         dispatch(incValue())
-    }
+    }, [dispatch])
 
-    const resetHandler = () => {
+    const resetHandler = useCallback(() => {
         dispatch(resetValue())
-    }
+    }, [dispatch])
 
     return (
         <div className={style.counterContainer}>

@@ -8,8 +8,7 @@ type InputPropsType = {
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const Input: React.FC<InputPropsType> = (props) => {
-
+export const Input: React.FC<InputPropsType> = React.memo((props) => {
     const error = useSelector<AppStateType, boolean>(state => state.counter.error)
 
     return (
@@ -20,4 +19,4 @@ export const Input: React.FC<InputPropsType> = (props) => {
             onChange={props.onChange}
         />
     )
-}
+})
