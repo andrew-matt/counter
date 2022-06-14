@@ -7,7 +7,7 @@ type ButtonPropsType = {
     title: string
 }
 
-export const Button: React.FC<ButtonPropsType> = (props) => {
+export const Button: React.FC<ButtonPropsType> = React.memo((props) => {
     return (
         <button
             onClick={props.callback}
@@ -17,4 +17,4 @@ export const Button: React.FC<ButtonPropsType> = (props) => {
             {props.title}
         </button>
     )
-}
+})
