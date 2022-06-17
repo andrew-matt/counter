@@ -6,16 +6,20 @@ import {AppStateType} from "../../bll/store";
 type InputPropsType = {
     value: number
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
+    className: string
 }
 
 export const Input: React.FC<InputPropsType> = React.memo((props) => {
-    const error = useSelector<AppStateType, boolean>(state => state.counter.error)
+    const maxValueError = useSelector<AppStateType, boolean>(state => state.counter.maxValueError)
+    const startValueError = useSelector<AppStateType, boolean>(state => state.counter.startValueError)
+
+    const error = maxValueError || startValueError
 
     return (
         <input
             type="number"
             value={props.value}
-            className={`${style.input} ${error && style.inputError}`}
+            className={props.className}
             onChange={props.onChange}
         />
     )

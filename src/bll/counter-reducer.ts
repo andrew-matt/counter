@@ -1,6 +1,7 @@
 type ActionType = ReturnType<typeof incValue>
     | ReturnType<typeof resetValue>
-    | ReturnType<typeof setError>
+    | ReturnType<typeof setMaxValueError>
+    | ReturnType<typeof setStartValueError>
     | ReturnType<typeof changeSettings>
     | ReturnType<typeof setValue>
     | ReturnType<typeof setMaxValue>
@@ -8,7 +9,8 @@ type ActionType = ReturnType<typeof incValue>
 
 const initialState = {
     settingsChanged: false,
-    error: false,
+    maxValueError: false,
+    startValueError: false,
     maxValue: 5,
     startValue: 0,
     value: 0
@@ -19,6 +21,7 @@ type InitialStateType = typeof initialState
 export const counterReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case "INC-VALUE":
+
             return {
                 ...state,
                 value: state.value + 1
@@ -28,10 +31,15 @@ export const counterReducer = (state: InitialStateType = initialState, action: A
                 ...state,
                 value: state.startValue
             }
-        case "SET-ERROR":
+        case "SET-MAX-VALUE-ERROR":
             return {
                 ...state,
-                error: action.error
+                maxValueError: action.maxValueError
+            }
+        case "SET-START-VALUE-ERROR":
+            return {
+                ...state,
+                startValueError: action.startValueError
             }
         case "SETTINGS-CHANGE":
             return {
@@ -60,7 +68,8 @@ export const counterReducer = (state: InitialStateType = initialState, action: A
 
 export const incValue = () => ({type: 'INC-VALUE'} as const)
 export const resetValue = () => ({type: 'RESET-VALUE'} as const)
-export const setError = (error: boolean) => ({type: 'SET-ERROR', error} as const)
+export const setMaxValueError = (maxValueError: boolean) => ({type: 'SET-MAX-VALUE-ERROR', maxValueError} as const)
+export const setStartValueError = (startValueError: boolean) => ({type: 'SET-START-VALUE-ERROR', startValueError} as const)
 export const changeSettings = (settingsChanged: boolean) => ({type: 'SETTINGS-CHANGE', settingsChanged} as const)
 export const setValue = (value: number) => ({type: 'SET-VALUE', value} as const)
 export const setMaxValue = (maxValue: number) => ({type: 'SET-MAX-VALUE', maxValue} as const)

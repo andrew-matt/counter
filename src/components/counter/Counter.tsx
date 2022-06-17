@@ -10,8 +10,11 @@ export const Counter = () => {
     const value = useSelector<AppStateType, number>(state => state.counter.value)
     const maxValue = useSelector<AppStateType, number>(state => state.counter.maxValue)
     const startValue = useSelector<AppStateType, number>(state => state.counter.startValue)
-    const error = useSelector<AppStateType, boolean>(state => state.counter.error)
+    const maxValueError = useSelector<AppStateType, boolean>(state => state.counter.maxValueError)
+    const startValueError = useSelector<AppStateType, boolean>(state => state.counter.startValueError)
     const settingsChanged = useSelector<AppStateType, boolean>(state => state.counter.settingsChanged)
+
+    const error = maxValueError || startValueError
 
     const dispatch = useDispatch()
 
