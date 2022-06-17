@@ -31,16 +31,20 @@ export const Counter = () => {
         dispatch(resetValue())
     }, [dispatch])
 
+    const showMode = () => {
+        if (settingsChanged) {
+            return `enter values and press 'set'`
+        } else if (error) {
+            return `Incorrect value!`
+        } else {
+            return value
+        }
+    }
+
     return (
         <div className={style.counterContainer}>
             <div className={valueContainerClass}>
-                {
-                    settingsChanged
-                        ? `enter values and press 'set'`
-                        : error
-                            ? `Incorrect value!`
-                            : value
-                }
+                {showMode()}
             </div>
             <div className={style.buttonsContainer}>
                 <Button
