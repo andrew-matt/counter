@@ -1,4 +1,5 @@
 import style from "./settings.module.css";
+import inputStyles from "../input/input.module.css";
 import React, {ChangeEvent, useCallback} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType, store} from "../../bll/store";
@@ -14,6 +15,7 @@ import {Button} from "../button/Button";
 import {Input} from "../input/Input";
 
 export const Settings = React.memo(() => {
+
     const maxValue = useSelector<AppStateType, number>(state => state.counter.maxValue)
     const startValue = useSelector<AppStateType, number>(state => state.counter.startValue)
     const maxValueError = useSelector<AppStateType, boolean>(state => state.counter.maxValueError)
@@ -71,7 +73,7 @@ export const Settings = React.memo(() => {
                     <Input
                         value={maxValue}
                         onChange={setMaxValueHandler}
-                        className={`${style.input} ${maxValueError && style.inputError}`}
+                        className={`${inputStyles.input} ${maxValueError && inputStyles.inputError}`}
                     />
                 </div>
                 <div className={style.inputContainer}>
@@ -79,7 +81,7 @@ export const Settings = React.memo(() => {
                     <Input
                         value={startValue}
                         onChange={setStartValueHandler}
-                        className={`${style.input} ${startValueError && style.inputError}`}
+                        className={`${inputStyles.input} ${startValueError && inputStyles.inputError}`}
                     />
                 </div>
             </div>
