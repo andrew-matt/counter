@@ -7,7 +7,7 @@ type ActionType = ReturnType<typeof incValue>
     | ReturnType<typeof setMaxValue>
     | ReturnType<typeof setStartValue>
 
-const initialState = {
+export const initialState = {
     settingsChanged: false,
     maxValueError: false,
     startValueError: false,
